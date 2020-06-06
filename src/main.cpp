@@ -1,13 +1,27 @@
 #include <filesystem>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
 namespace fs = std::filesystem;
 
 std::vector< std::filesystem::directory_entry > get_file_list( std::string const &folder_path );
+void ensure_path_is_a_folder( std::string const &path_str );
 
 int main()
 {
+    return 0;
+}
+
+void ensure_path_is_a_folder( std::string const &path_str )
+{
+    // fs::path const path{path_str};
+    fs::directory_entry const entry{path_str};
+
+    if( !entry.is_directory() )
+    {
+        throw std::domain_error( "Download path should point to a folder!" );
+    }
 }
 
 std::vector< std::filesystem::directory_entry > get_file_list( std::string const &folder_path )
