@@ -13,16 +13,22 @@
 
 namespace bfs = boost::filesystem;
 
-static std::vector< std::string > image_extensions      = {".png",
+static std::vector< std::string > image_extensions = {".png",
                                                       ".jpg",
                                                       ".jpeg",
                                                       ".tiff",
                                                       ".gif"};
+
 static std::vector< std::string > compressed_extensions = {".zip",
                                                            ".gz",
                                                            ".xz",
                                                            ".bz2",
                                                            ".rar"};
+
+static std::vector< std::string > audio_extensions = {".mp3",
+                                                      ".ogg",
+                                                      ".wav",
+                                                      ".midi"};
 
 namespace organizer
 {
@@ -53,6 +59,17 @@ namespace organizer
     {
         return std::any_of( compressed_extensions.begin(),
                             compressed_extensions.end(),
+                            [&file_path]( auto const &extension ) {
+                                return extension ==
+                                       to_lower_case(
+                                           file_path.extension().string() );
+                            } );
+    }
+
+    bool is_audio( Path const &file_path )
+    {
+        return std::any_of( audio_extensions.begin(),
+                            audio_extensions.end(),
                             [&file_path]( auto const &extension ) {
                                 return extension ==
                                        to_lower_case(
