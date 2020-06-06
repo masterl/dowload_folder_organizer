@@ -5,49 +5,57 @@
 
 namespace organizer
 {
+    static std::string hash_to_string( unsigned char const *const hash,
+                                       unsigned const block_size )
+    {
+        std::ostringstream string_builder;
+
+        string_builder.fill( '0' );
+
+        for( unsigned i = 0; i < block_size; i++ )
+        {
+            string_builder << std::setw( 2 ) << std::hex
+                           << static_cast< unsigned int >( hash[i] );
+        }
+
+        return string_builder.str();
+    }
+
     std::string get_file_sha1( Path const &path )
     {
-        int bytes_read = 1;
-        MHASH td;
-        char buffer[1024];
-        unsigned char *hash;
-
         std::ifstream file{path.string(), std::ios::binary};
 
         if( !file.is_open() )
         {
-            std::cout << "open failed\n";
             return "";
         }
 
-        td = mhash_init( MHASH_SHA1 );
+        MHASH td{mhash_init( MHASH_SHA1 )};
 
         if( td == MHASH_FAILED )
         {
             return "";
         }
 
+        int bytes_read = 1;
+        char buffer[1024];
         while( bytes_read != 0 )
         {
             bytes_read = file.readsome( buffer, 1024 );
 
-            mhash( td, buffer, bytes_read );
+            if( bytes_read != 0 )
+            {
+                mhash( td, buffer, bytes_read );
+            }
         }
 
-        hash = static_cast< unsigned char * >( mhash_end( td ) );
+        unsigned char *hash{static_cast< unsigned char * >( mhash_end( td ) )};
 
-        std::ostringstream string_builder;
-
-        string_builder.fill( '0' );
-
-        for( unsigned i = 0; i < mhash_get_block_size( MHASH_SHA1 ); i++ )
-        {
-            string_builder << std::setw( 2 ) << std::hex
-                           << static_cast< unsigned int >( hash[i] );
-        }
+        auto const block_size = mhash_get_block_size( MHASH_SHA1 );
+        std::string const hash_str{hash_to_string( hash, block_size )};
 
         free( hash );
 
-        return string_builder.str();
+        return hash_str;
     }
 } // namespace organizer
