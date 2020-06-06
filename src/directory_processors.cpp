@@ -18,8 +18,7 @@ namespace organizer
         }
     }
 
-    void process_compressed( Path const &dest_folder_path,
-                             DirEntries const &files )
+    void process_compressed( Path const &dest_folder_path, DirEntries const &files )
     {
         for( auto &file : files )
         {
@@ -46,6 +45,17 @@ namespace organizer
         for( auto &file : files )
         {
             if( is_pdf( file.path() ) && is_old( file ) )
+            {
+                move_file( file.path(), dest_folder_path );
+            }
+        }
+    }
+
+    void process_documents( Path const &dest_folder_path, DirEntries const &files )
+    {
+        for( auto &file : files )
+        {
+            if( is_document( file.path() ) && is_old( file ) )
             {
                 move_file( file.path(), dest_folder_path );
             }

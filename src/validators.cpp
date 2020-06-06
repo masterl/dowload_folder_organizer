@@ -27,6 +27,9 @@ static std::vector< std::string > compressed_extensions = {".zip",
 
 static std::vector< std::string > audio_extensions = {".mp3", ".ogg", ".wav", ".midi"};
 
+static std::vector< std::string > document_extensions =
+    {".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".ods", ".odt"};
+
 namespace organizer
 {
     void ensure_path_is_a_folder( std::string const &path_str )
@@ -74,6 +77,16 @@ namespace organizer
     bool is_pdf( Path const &file_path )
     {
         return to_lower_case( file_path.extension().string() ) == ".pdf";
+    }
+
+    bool is_document( Path const &file_path )
+    {
+        return std::any_of( document_extensions.begin(),
+                            document_extensions.end(),
+                            [&file_path]( auto const &extension ) {
+                                return extension ==
+                                       to_lower_case( file_path.extension().string() );
+                            } );
     }
 
     bool is_old( boost::filesystem::directory_entry const &file )

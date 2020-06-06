@@ -16,8 +16,7 @@ int main()
     {
         org::ensure_path_is_a_folder( folder_path );
 
-        DestFolders const dest_folders =
-            org::create_dest_folders( folder_path );
+        DestFolders const dest_folders = org::create_dest_folders( folder_path );
 
         auto file_list = org::get_file_list( folder_path );
 
@@ -25,6 +24,7 @@ int main()
         org::process_compressed( dest_folders.at( "compressed" ), file_list );
         org::process_audios( dest_folders.at( "audios" ), file_list );
         org::process_pdfs( dest_folders.at( "pdfs" ), file_list );
+        org::process_documents( dest_folders.at( "documents" ), file_list );
     }
     catch( std::exception &error )
     {
