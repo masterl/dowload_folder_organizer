@@ -19,9 +19,9 @@ static std::vector< std::string > image_extensions      = {".png",
                                                       ".tiff",
                                                       ".gif"};
 static std::vector< std::string > compressed_extensions = {".zip",
-                                                           ".tar.gz",
-                                                           ".tar.xz",
-                                                           ".tar.bz2",
+                                                           ".gz",
+                                                           ".xz",
+                                                           ".bz2",
                                                            ".rar"};
 
 namespace organizer
