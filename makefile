@@ -40,7 +40,7 @@ CXXFLAGS += -isystem $(PROJECT_ROOT)/vendor
 #STACKTRACEFLAGS = -rdynamic
 #PTHREADFLAG = -lpthread
 
-LINKFLAGS := -lboost_filesystem -lboost_system
+LINKFLAGS := -lboost_filesystem -lboost_system -lmhash
 ifeq ($(MAKECMDGOALS),test)
 	TESTFLAGS :=
 endif
