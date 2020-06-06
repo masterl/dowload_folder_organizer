@@ -1,29 +1,33 @@
 #include <filesystem>
-#include <stdexcept>
+#include <iostream>
 #include <string>
 #include <vector>
 
+#include "validators.hpp"
+
 namespace fs = std::filesystem;
-using FileList = std::vector< std::filesystem::directory_entry >;
 
 FileList get_file_list( std::string const &folder_path );
-void ensure_path_is_a_folder( std::string const &path_str );
 
 int main()
 {
-    return 0;
-}
+    std::string const folder_path{"/home/leonardo/Downloads"};
 
-void ensure_path_is_a_folder( std::string const &path_str )
-{
-    fs::directory_entry const entry{path_str};
-
-    if( !entry.is_directory() )
+    try
     {
-        throw std::domain_error( "Download path should point to a folder!\n"
-                                 "  Invalid path: [" +
-                                 path_str + "]" );
+        ensure_path_is_a_folder( folder_path );
+
+        for( auto &file : get_file_list( folder_path ) )
+        {
+            std::cout << file.path() << '\n';
+        }
     }
+    catch( std::exception &error )
+    {
+        std::cerr << error.what() << "\n";
+    }
+
+    return 0;
 }
 
 FileList get_file_list( std::string const &folder_path )
