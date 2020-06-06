@@ -4,8 +4,9 @@
 #include <vector>
 
 namespace fs = std::filesystem;
+using FileList = std::vector< std::filesystem::directory_entry >;
 
-std::vector< std::filesystem::directory_entry > get_file_list( std::string const &folder_path );
+FileList get_file_list( std::string const &folder_path );
 void ensure_path_is_a_folder( std::string const &path_str );
 
 int main()
@@ -25,7 +26,7 @@ void ensure_path_is_a_folder( std::string const &path_str )
     }
 }
 
-std::vector< std::filesystem::directory_entry > get_file_list( std::string const &folder_path )
+FileList get_file_list( std::string const &folder_path )
 {
     std::vector< std::filesystem::directory_entry > files;
 
