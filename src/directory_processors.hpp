@@ -9,6 +9,8 @@ namespace organizer
                          DirEntries const &files );
     void process_compressed( Path const &dest_folder_path,
                              DirEntries const &files );
+    void process_audios( Path const &dest_folder_path,
+                         DirEntries const &files );
 } // namespace organizer
 
 #endif

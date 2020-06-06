@@ -23,6 +23,7 @@ int main()
 
         org::process_images( dest_folders.at( "images" ), file_list );
         org::process_compressed( dest_folders.at( "compressed" ), file_list );
+        org::process_audios( dest_folders.at( "audios" ), file_list );
     }
     catch( std::exception &error )
     {
