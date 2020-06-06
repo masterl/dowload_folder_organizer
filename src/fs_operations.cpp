@@ -3,6 +3,8 @@
 #include <sstream>
 #include <tuple>
 
+#include "hash_functions.hpp"
+
 namespace bfs = boost::filesystem;
 namespace bs  = boost::system;
 
