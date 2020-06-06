@@ -30,6 +30,9 @@ static std::vector< std::string > audio_extensions = {".mp3", ".ogg", ".wav", ".
 static std::vector< std::string > document_extensions =
     {".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".ods", ".odt"};
 
+static std::vector< std::string > source_extensions =
+    {".c", ".cpp", ".js", ".java", ".php", ".py", ".wasm", ".sh", ".html"};
+
 namespace organizer
 {
     void ensure_path_is_a_folder( std::string const &path_str )
@@ -83,6 +86,16 @@ namespace organizer
     {
         return std::any_of( document_extensions.begin(),
                             document_extensions.end(),
+                            [&file_path]( auto const &extension ) {
+                                return extension ==
+                                       to_lower_case( file_path.extension().string() );
+                            } );
+    }
+
+    bool is_source( Path const &file_path )
+    {
+        return std::any_of( source_extensions.begin(),
+                            source_extensions.end(),
                             [&file_path]( auto const &extension ) {
                                 return extension ==
                                        to_lower_case( file_path.extension().string() );

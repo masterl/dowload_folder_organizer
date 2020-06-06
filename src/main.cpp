@@ -25,6 +25,7 @@ int main()
         org::process_audios( dest_folders.at( "audios" ), file_list );
         org::process_pdfs( dest_folders.at( "pdfs" ), file_list );
         org::process_documents( dest_folders.at( "documents" ), file_list );
+        org::process_sources( dest_folders.at( "sources" ), file_list );
     }
     catch( std::exception &error )
     {
