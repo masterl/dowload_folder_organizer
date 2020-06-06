@@ -1,13 +1,10 @@
 #ifndef DEST_FOLDERS_HPP
 #define DEST_FOLDERS_HPP
 
-#include <filesystem>
+#include "types.hpp"
 
-namespace download_organizer
+namespace organizer
 {
-    namespace fs = std::filesystem;
-    using Path = fs::path;
-
     struct DestFolders
     {
         DestFolders( Path const &base )
@@ -27,8 +24,6 @@ namespace download_organizer
         Path const documents;
         Path const sources;
     };
-} // namespace download_organizer
-
-using DestFolders = download_organizer::DestFolders;
+} // namespace organizer
 
 #endif

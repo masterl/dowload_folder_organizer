@@ -1,8 +1,14 @@
 #include <iostream>
 #include <string>
 
+#include "DestFolders.hpp"
+#include "directory_processors.hpp"
 #include "fs_operations.hpp"
 #include "validators.hpp"
+
+namespace org = organizer;
+
+using DestFolders = org::DestFolders;
 
 int main()
 {
@@ -10,12 +16,13 @@ int main()
 
     try
     {
-        ensure_path_is_a_folder( folder_path );
+        org::ensure_path_is_a_folder( folder_path );
 
-        for( auto &file : get_file_list( folder_path ) )
-        {
-            std::cout << file.path() << '\n';
-        }
+        DestFolders const dest_folders{folder_path};
+
+        auto file_list = org::get_file_list( folder_path );
+
+        org::process_images( dest_folders.images, file_list );
     }
     catch( std::exception &error )
     {
