@@ -38,47 +38,44 @@ namespace organizer
 
     void move_file( Path const &from, Path const &to_directory )
     {
+        auto const from_hash = get_file_sha1( from );
         auto const to_template =
             Path( to_directory ).append( from.filename().string() );
         auto const fail_if_exists{bfs::copy_option::fail_if_exists};
-        auto ec{bs::errc::make_error_code( bs::errc::errc_t::io_error )};
 
         auto to{to_template};
         int error_count{1};
 
-        while( ec )
+        while( true )
         {
-            // copy_file( from, to, fail_if_exists, ec );
-
+            if( !bfs::exists( bfs::status( to ) ) )
             {
-                std::cout << "File: " << from.string() << '\n';
-                std::cout << "Hash: " << get_file_sha1( from ) << '\n';
+                copy_file( from, to, fail_if_exists );
                 break;
             }
 
-            if( ec )
+            auto const to_hash = get_file_sha1( to );
+
+            if( to_hash == from_hash )
             {
-                std::ostringstream string_builder;
-
-                auto const [stem, extension] =
-                    split_path_on_extension( to_template );
-
-                string_builder << stem;
-                string_builder << "_(" << error_count << ')';
-                string_builder << extension;
-
-                ++error_count;
-
-                to = string_builder.str();
-
-                // std::cout << to << '\n';
-
-                if( error_count > 5 )
-                {
-                    break;
-                }
+                break;
             }
+
+            std::ostringstream string_builder;
+
+            auto const [stem, extension] =
+                split_path_on_extension( to_template );
+
+            string_builder << stem;
+            string_builder << "_(" << error_count << ')';
+            string_builder << extension;
+
+            ++error_count;
+
+            to = string_builder.str();
         }
+
+        bfs::remove( from );
     }
 
     static std::tuple< std::string, std::string >
