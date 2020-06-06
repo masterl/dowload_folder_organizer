@@ -13,7 +13,7 @@ namespace organizer
         dest_folders["images"]     = Path( base_path ).append( "images" ).string();
         dest_folders["compressed"] = Path( base_path ).append( "compressed" ).string();
         dest_folders["audios"]     = Path( base_path ).append( "audios" ).string();
-        dest_folders["pdf"]        = Path( base_path ).append( "pdf" ).string();
+        dest_folders["pdfs"]       = Path( base_path ).append( "pdfs" ).string();
         dest_folders["documents"]  = Path( base_path ).append( "documents" ).string();
         dest_folders["sources"]    = Path( base_path ).append( "sources" ).string();
 

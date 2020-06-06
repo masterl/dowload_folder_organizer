@@ -10,6 +10,7 @@ namespace organizer
     bool is_image( Path const &file_path );
     bool is_compressed( Path const &file_path );
     bool is_audio( Path const &file_path );
+    bool is_pdf( Path const &file_path );
     bool is_old( boost::filesystem::directory_entry const &file );
 } // namespace organizer
 

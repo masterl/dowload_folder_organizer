@@ -25,10 +25,7 @@ static std::vector< std::string > compressed_extensions = {".zip",
                                                            ".bz2",
                                                            ".rar"};
 
-static std::vector< std::string > audio_extensions = {".mp3",
-                                                      ".ogg",
-                                                      ".wav",
-                                                      ".midi"};
+static std::vector< std::string > audio_extensions = {".mp3", ".ogg", ".wav", ".midi"};
 
 namespace organizer
 {
@@ -50,8 +47,7 @@ namespace organizer
                             image_extensions.end(),
                             [&file_path]( auto const &extension ) {
                                 return extension ==
-                                       to_lower_case(
-                                           file_path.extension().string() );
+                                       to_lower_case( file_path.extension().string() );
                             } );
     }
 
@@ -61,8 +57,7 @@ namespace organizer
                             compressed_extensions.end(),
                             [&file_path]( auto const &extension ) {
                                 return extension ==
-                                       to_lower_case(
-                                           file_path.extension().string() );
+                                       to_lower_case( file_path.extension().string() );
                             } );
     }
 
@@ -72,9 +67,13 @@ namespace organizer
                             audio_extensions.end(),
                             [&file_path]( auto const &extension ) {
                                 return extension ==
-                                       to_lower_case(
-                                           file_path.extension().string() );
+                                       to_lower_case( file_path.extension().string() );
                             } );
+    }
+
+    bool is_pdf( Path const &file_path )
+    {
+        return to_lower_case( file_path.extension().string() ) == ".pdf";
     }
 
     bool is_old( boost::filesystem::directory_entry const &file )

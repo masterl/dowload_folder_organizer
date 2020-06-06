@@ -24,6 +24,7 @@ int main()
         org::process_images( dest_folders.at( "images" ), file_list );
         org::process_compressed( dest_folders.at( "compressed" ), file_list );
         org::process_audios( dest_folders.at( "audios" ), file_list );
+        org::process_pdfs( dest_folders.at( "pdfs" ), file_list );
     }
     catch( std::exception &error )
     {
