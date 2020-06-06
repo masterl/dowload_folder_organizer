@@ -1,6 +1,5 @@
 #include "fs_operations.hpp"
 
-#include <mhash.h>
 #include <sstream>
 #include <tuple>
 
@@ -45,48 +44,19 @@ namespace organizer
                 path.extension().string()};
     }
 
-    std::string get_file_sha1( Path const &path )
     {
-        int bytes_read = 1;
-        MHASH td;
-        unsigned char buffer[1024];
-        unsigned char *hash;
 
-        FILE *file = fopen( path.string().c_str(), "r" );
 
-        if( !file )
         {
-            std::cout << "open failed\n";
-            return "";
+
+
+
+
+
+
+
         }
 
-        td = mhash_init( MHASH_SHA1 );
 
-        if( td == MHASH_FAILED )
-        {
-            return "";
-        }
-
-        while( bytes_read != 0 )
-        {
-            bytes_read = fread( buffer, 1, 1024, file );
-            mhash( td, buffer, bytes_read );
-        }
-
-        hash = static_cast< unsigned char * >( mhash_end( td ) );
-
-        std::ostringstream string_builder;
-
-        string_builder.fill( '0' );
-
-        for( int i = 0; i < mhash_get_block_size( MHASH_SHA1 ); i++ )
-        {
-            string_builder << std::setw( 2 ) << std::hex
-                           << static_cast< unsigned int >( hash[i] );
-        }
-
-        free( hash );
-
-        return string_builder.str();
     }
 } // namespace organizer
