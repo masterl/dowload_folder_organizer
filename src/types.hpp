@@ -4,6 +4,6 @@
 #include <filesystem>
 #include <vector>
 
-using FileList = std::vector< std::filesystem::directory_entry >;
+using DirEntries = std::vector< std::filesystem::directory_entry >;
 
 #endif

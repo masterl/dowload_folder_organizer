@@ -3,6 +3,6 @@
 
 #include "types.hpp"
 
-FileList get_file_list( std::string const &folder_path );
+DirEntries get_file_list( std::string const &folder_path );
 
 #endif

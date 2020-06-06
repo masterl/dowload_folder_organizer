@@ -2,7 +2,7 @@
 
 namespace fs = std::filesystem;
 
-FileList get_file_list( std::string const &folder_path )
+DirEntries get_file_list( std::string const &folder_path )
 {
     std::vector< std::filesystem::directory_entry > files;
 
