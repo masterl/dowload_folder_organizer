@@ -1,9 +1,14 @@
 #include "fs_operations.hpp"
 
+#include <tuple>
+
 namespace bfs = boost::filesystem;
 
 namespace organizer
 {
+    static std::tuple< std::string, std::string >
+    split_path_on_extension( Path const &path );
+
     DirEntries get_file_list( std::string const &folder_path )
     {
         DirEntries files;
@@ -27,5 +32,14 @@ namespace organizer
         timeinfo = localtime( &raw_time );
 
         return boost::gregorian::date_from_tm( *timeinfo );
+    }
+
+    static std::tuple< std::string, std::string >
+    split_path_on_extension( Path const &path )
+    {
+        auto const stem{path.stem().string()};
+
+        return {path.parent_path().append( stem ).string(),
+                path.extension().string()};
     }
 } // namespace organizer
