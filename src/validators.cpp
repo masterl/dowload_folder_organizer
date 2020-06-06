@@ -9,10 +9,20 @@
 #include <boost/filesystem.hpp>
 
 #include "fs_operations.hpp"
+#include "utils.hpp"
 
 namespace bfs = boost::filesystem;
 
-static std::vector< std::string > image_extensions = {".png", ".jpg", ".jpeg", ".tiff", ".gif"};
+static std::vector< std::string > image_extensions      = {".png",
+                                                      ".jpg",
+                                                      ".jpeg",
+                                                      ".tiff",
+                                                      ".gif"};
+static std::vector< std::string > compressed_extensions = {".zip",
+                                                           ".tar.gz",
+                                                           ".tar.xz",
+                                                           ".tar.bz2",
+                                                           ".rar"};
 
 namespace organizer
 {
@@ -33,7 +43,20 @@ namespace organizer
         return std::any_of( image_extensions.begin(),
                             image_extensions.end(),
                             [&file_path]( auto const &extension ) {
-                                return extension == file_path.extension().string();
+                                return extension ==
+                                       to_lower_case(
+                                           file_path.extension().string() );
+                            } );
+    }
+
+    bool is_compressed( Path const &file_path )
+    {
+        return std::any_of( compressed_extensions.begin(),
+                            compressed_extensions.end(),
+                            [&file_path]( auto const &extension ) {
+                                return extension ==
+                                       to_lower_case(
+                                           file_path.extension().string() );
                             } );
     }
 

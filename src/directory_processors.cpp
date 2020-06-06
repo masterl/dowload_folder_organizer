@@ -17,4 +17,16 @@ namespace organizer
             }
         }
     }
+
+    void process_compressed( Path const &dest_folder_path,
+                             DirEntries const &files )
+    {
+        for( auto &file : files )
+        {
+            if( is_compressed( file.path() ) && is_old( file ) )
+            {
+                move_file( file.path(), dest_folder_path );
+            }
+        }
+    }
 } // namespace organizer
