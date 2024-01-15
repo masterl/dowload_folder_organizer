@@ -43,7 +43,6 @@ namespace organizer
         auto const from_hash = get_file_sha1( from );
         auto const to_template =
             Path( to_directory ).append( from.filename().string() );
-        auto const fail_if_exists{bfs::copy_option::fail_if_exists};
 
         auto to{to_template};
         int error_count{1};
@@ -52,7 +51,7 @@ namespace organizer
         {
             if( !bfs::exists( bfs::status( to ) ) )
             {
-                copy_file( from, to, fail_if_exists );
+                bfs::rename(from, to);
                 break;
             }
 
