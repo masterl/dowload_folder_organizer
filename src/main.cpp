@@ -8,9 +8,18 @@
 
 namespace org = organizer;
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::string const folder_path{"/home/leonardo/Downloads"};
+    if (argc != 2)
+    {
+        std::cout
+            << "You need to specify the target folder:\n"
+            << argv[0] << " TARGET_FOLDER";
+        
+        return EXIT_FAILURE;
+    }
+
+    std::string const folder_path{argv[1]};
 
     try
     {
@@ -32,5 +41,5 @@ int main()
         std::cerr << error.what() << "\n";
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }
