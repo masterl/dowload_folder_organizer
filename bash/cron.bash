@@ -22,6 +22,17 @@ set -eo pipefail;
 function main()
 {
     ensure_target_folder_was_passed "${TARGET_FOLDER}"
+    ensure_executable_exists
+
+    "${EXECUTABLE_PATH}" "${TARGET_FOLDER}"
+}
+
+function ensure_executable_exists()
+{
+    if [ ! -f "${EXECUTABLE_PATH}" ]
+    then
+        cd "${PROJECT_ROOT}" && make
+    fi
 }
 
 function ensure_target_folder_was_passed()
