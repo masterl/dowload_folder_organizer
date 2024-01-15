@@ -102,7 +102,7 @@ MAIN_FLAGS := $(if $(call is_cpp_project),$(CXXFLAGS),$(CFLAGS))
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Executable definitions
 #--------------------------------------------------------------------------
-EXEC := exec
+EXEC := download_organizer
 TESTEXEC := test
 
 BINDIR := bin
@@ -115,7 +115,7 @@ exec: rmexec allobjs FORCE | $(BINDIR)
 	$(MAIN_COMPILER) $(ALLOBJS) $(MAIN_FLAGS) -o $(BINDIR)/$(EXEC) $(LINKFLAGS)
 	@echo -e '=----------------------------------------------------='
 	@echo -e '=           executable generated/updated             ='
-	@echo -e '=           Executable: $(BINDIR)/$(EXEC)  \t\t     ='
+	@echo -e '=           Executable: $(BINDIR)/$(EXEC)       ='
 	@echo -e '=----------------------------------------------------=\n\n'
 
 help:
