@@ -17,7 +17,7 @@ namespace organizer
         dest_folders["documents"]  = Path( base_path ).append( "documents" ).string();
         dest_folders["sources"]    = Path( base_path ).append( "sources" ).string();
 
-        for( auto const [key, folder] : dest_folders )
+        for( auto const &[key, folder] : dest_folders )
         {
             std::cout << folder << '\n';
 

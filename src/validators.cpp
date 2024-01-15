@@ -104,8 +104,8 @@ namespace organizer
 
     bool is_old( boost::filesystem::directory_entry const &file )
     {
-        int const days_in_month{30};
-        int const min_days{4 * days_in_month};
+        int constexpr days_in_month{30};
+        int constexpr min_days{4 * days_in_month};
 
         Date const file_date = get_modification_time( file.path() );
 
